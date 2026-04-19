@@ -1,52 +1,48 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+.header {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 2em;
+}
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+.card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin: 10px;
+    padding: 20px;
+    width: calc(33% - 40px);
+    transition: transform 0.2s;
+}
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+.card:hover {
+    transform: translateY(-5px);
+}
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+@media (max-width: 768px) {
+    .card {
+        width: calc(50% - 40px);
+    }
+}
 
-jobs:
-  # Single deploy job since we're just deploying; no build step needed for static files
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: './dist'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+@media (max-width: 480px) {
+    .card {
+        width: calc(100% - 40px);
+    }
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    margin: 0;
+}
